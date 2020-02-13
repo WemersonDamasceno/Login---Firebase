@@ -1,9 +1,10 @@
-package com.example.appchat_firebase;
+package com.example.appchat_firebase.view;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 
 import android.Manifest;
 import android.app.ProgressDialog;
@@ -15,13 +16,14 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.appchat_firebase.R;
+import com.example.appchat_firebase.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -31,6 +33,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -87,6 +91,7 @@ public class RegisterActivity extends AppCompatActivity {
         editEmail = findViewById(R.id.emailNovo);
         editSenha = findViewById(R.id.senhaNovo);
         imagemView = findViewById(R.id.imgView);
+
 
 
 
@@ -224,6 +229,25 @@ public class RegisterActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(Uri uri) {
                             //fazer algo com o id da imagem que é o uri
+                            String uid = FirebaseAuth.getInstance().getUid();
+                            String username = editNome.getText().toString();
+                            String profileUrl = uri.toString();
+
+                            User user = new User(uid, username, profileUrl);
+                            FirebaseFirestore.getInstance().collection("user")
+                                    .add(user).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                @Override
+                                public void onSuccess(DocumentReference documentReference) {
+                                         //deu bom
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                        //deu ruim
+                                }
+                            });
+
+
                         }
                     });
                     progressDialog.dismiss();
