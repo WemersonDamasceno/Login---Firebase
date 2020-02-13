@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">App Chat - Firebase</string>
+    <string name="entrar">Entrar</string>
+    <string name="n_o_tem_uma_conta_crie_aqui">Não tem uma conta? Crie Aqui !</string>
+    <string name="senha">  Senha</string>
+    <string name="email">  Email</string>
+    <string name="nome">Nome</string>
+    <string name="foto">Foto</string>
+</resources>

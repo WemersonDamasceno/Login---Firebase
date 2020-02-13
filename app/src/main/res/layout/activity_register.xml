@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegisterActivity"
+    android:background="#D6D8D8">
+
+    <ImageView
+        android:id="@+id/imgView"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="32dp"
+        android:layout_centerVertical="false"
+        android:scaleType="fitXY"
+        android:layout_centerHorizontal="true"/>
+
+    <Button
+        android:id="@+id/btSelecionarFoto"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="32dp"
+        android:layout_centerVertical="false"
+        android:layout_centerHorizontal="true"
+        android:text="@string/foto"
+        android:textStyle="bold"
+        android:textColor="#FAF9F9"
+        android:background="@drawable/btn_foto_arredondada"/>
+
+
+
+    <EditText
+        android:id="@+id/nomeNovo"
+        android:background="@drawable/text_redondo"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginTop="250dp"
+        android:ems="13"
+        android:hint="@string/nome"
+        android:layout_centerHorizontal="true"/>
+
+
+    <EditText
+        android:id="@+id/emailNovo"
+        android:layout_below="@+id/nomeNovo"
+        android:background="@drawable/text_redondo"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginTop="32dp"
+        android:ems="13"
+        android:hint="@string/email"
+        android:layout_centerHorizontal="true"/>
+
+    <EditText
+        android:id="@+id/senhaNovo"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:background="@drawable/text_redondo"
+        android:layout_marginTop="32dp"
+        android:ems="13"
+        android:layout_below="@+id/emailNovo"
+        android:hint="@string/senha"
+        android:layout_centerHorizontal="true"/>
+
+    <Button
+        android:id="@+id/btEntrarNovo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/senhaNovo"
+        android:layout_marginTop="32dp"
+        android:ems="13"
+        android:text="@string/entrar"
+        android:textStyle="bold"
+        android:background="@drawable/button_redondo"
+        android:textColor="#F2F2F5"
+        android:layout_centerHorizontal="true"/>
+
+
+
+
+
+
+
+</RelativeLayout>
