@@ -36,29 +36,14 @@ TextView tvCriarConta;
 
         btEntrar.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
                 String nome,email,senha;
                 email = editEmail.getText().toString();
                 senha = editSenha.getText().toString();
 
-                if (email == null || email.equals("") || senha == null || senha.equals("")) {
-                    Toast.makeText(LoginActivity.this, "Email e senha devem ser preenchidos", Toast.LENGTH_LONG).show();
-                    return;
-                }
+                verificarUserInFirebase(email,senha);
 
-                FirebaseAuth.getInstance().signInWithEmailAndPassword(email, senha).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        Toast.makeText(LoginActivity.this, "Login realizado com sucesso", Toast.LENGTH_SHORT).show();
-                        //deu bom
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        //deu ruim
-                        Toast.makeText(LoginActivity.this, "Login deu ruim", Toast.LENGTH_SHORT).show();
-                    }
-                });
+
 
 
             }
@@ -73,6 +58,30 @@ TextView tvCriarConta;
                 startActivity(intent);
             }
         });
-
     }
+
+    private void verificarUserInFirebase(String email, String senha) {
+        if (email == null || email.equals("") || senha == null || senha.equals("")) {
+            Toast.makeText(LoginActivity.this, "Email e senha devem ser preenchidos", Toast.LENGTH_LONG).show();
+            return;
+        }
+        FirebaseAuth.getInstance().signInWithEmailAndPassword(email, senha).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                Toast.makeText(LoginActivity.this, "Login realizado com sucesso", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(LoginActivity.this, MessagesActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                //deu bom
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                //deu ruim
+                Toast.makeText(LoginActivity.this, "Login deu ruim", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
 }

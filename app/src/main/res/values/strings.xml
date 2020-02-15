@@ -1,9 +1,17 @@
 <resources>
-    <string name="app_name">App Chat - Firebase</string>
+    <string name="app_name">App Chat Friends</string>
     <string name="entrar">Entrar</string>
     <string name="n_o_tem_uma_conta_crie_aqui">Não tem uma conta? Crie Aqui !</string>
     <string name="senha">  Senha</string>
     <string name="email">  Email</string>
     <string name="nome">Nome</string>
     <string name="foto">Foto</string>
+    <string name="contatos">contatos</string>
+    <string name="logout">logout</string>
+    <string name="texto_de_teste">texto de teste</string>
+    <string name="digite_uma_mensagem">Digite uma mensagem!</string>
+    <string name="enviar">Enviar</string>
+    <string name="essa_uma_mensagem_teste">Essa é uma mensagem teste</string>
+    <string name="exemplo_quando_for_implementado_status">Exemplo quando for implementado status</string>
+    <string name="mensagens">Mensagens</string>
 </resources>

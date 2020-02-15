@@ -5,12 +5,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.LoginActivity"
-    android:background="#D6D8D8">
+    tools:context=".view.LoginActivity">
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/logo"/>
 
 
     <EditText
         android:id="@+id/email"
+        android:backgroundTint="#71D3D3CF"
         android:background="@drawable/text_redondo"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
@@ -22,6 +30,7 @@
     <EditText
         android:id="@+id/senha"
         android:layout_width="wrap_content"
+        android:backgroundTint="#70D3D3CF"
         android:layout_height="30dp"
         android:background="@drawable/text_redondo"
         android:layout_marginTop="32dp"
@@ -47,7 +56,8 @@
         android:id="@+id/txtNãoTemConta"
         android:layout_below="@+id/btEntrar"
         android:layout_marginTop="32dp"
-        android:textColor="#519249"
+        android:textSize="17sp"
+        android:textColor="#2BC2C5"
         android:textStyle="bold"
         android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"

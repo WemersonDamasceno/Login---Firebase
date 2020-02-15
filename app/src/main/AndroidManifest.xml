@@ -12,14 +12,29 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.RegisterActivity"></activity>
-        <activity android:name=".view.LoginActivity">
+        <activity android:name=".view.ChatActivity">
+
+            android:name=".view.ContatosActivity"
+            android:label="@string/contatos">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.ContatosActivity" />
+        </activity>
+        <activity
+            android:name=".view.ContatosActivity"
+            android:label="@string/contatos">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.MessagesActivity" />
+        </activity>
+        <activity android:name=".view.MessagesActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".view.RegisterActivity" />
+        <activity android:name=".view.LoginActivity" />
     </application>
 
 </manifest>

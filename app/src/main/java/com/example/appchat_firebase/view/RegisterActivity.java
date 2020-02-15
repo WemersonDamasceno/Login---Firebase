@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 
 import android.Manifest;
 import android.app.ProgressDialog;
@@ -16,6 +15,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,7 +23,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.appchat_firebase.R;
-import com.example.appchat_firebase.model.User;
+import com.example.appchat_firebase.model.Usuario;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -207,6 +207,7 @@ public class RegisterActivity extends AppCompatActivity {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
+                Log.e("teste", "autenticar");
                 Toast.makeText(RegisterActivity.this, "Falha ao autenticar", Toast.LENGTH_SHORT).show();
             }
         });
@@ -220,8 +221,9 @@ public class RegisterActivity extends AppCompatActivity {
             final ProgressDialog progressDialog = new ProgressDialog(RegisterActivity.this);
             progressDialog.setTitle("Uploading...");
             progressDialog.show();
+            String uuidRandom = UUID.randomUUID().toString();
 
-            storageReference = storageReference.child("images/"+ UUID.randomUUID().toString());
+            storageReference = storageReference.child("images/"+uuidRandom);
             storageReference.putFile(selectedImage).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -233,21 +235,24 @@ public class RegisterActivity extends AppCompatActivity {
                             String username = editNome.getText().toString();
                             String profileUrl = uri.toString();
 
-                            User user = new User(uid, username, profileUrl);
-                            FirebaseFirestore.getInstance().collection("user")
-                                    .add(user).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                            Usuario user = new Usuario(username,uid, profileUrl);
+
+                            FirebaseFirestore.getInstance().collection("users")
+                                    .document(uid)
+                                    .set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
-                                public void onSuccess(DocumentReference documentReference) {
-                                         //deu bom
+                                public void onSuccess(Void aVoid) {
+                                    Intent intent = new Intent(RegisterActivity.this, MessagesActivity.class);
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    startActivity(intent);
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
+                                    Log.e("users", "teste");
                                         //deu ruim
                                 }
                             });
-
-
                         }
                     });
                     progressDialog.dismiss();
@@ -263,7 +268,7 @@ public class RegisterActivity extends AppCompatActivity {
                 @Override
                 public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
                     double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
-                    progressDialog.setTitle("Uploaded " + (int) progress + "%");
+                    progressDialog.setTitle("Carregando... " + (int) progress + "% completo");
                 }
             });
         }
